@@ -1,5 +1,22 @@
 {
   "name": "ab-animated-banner",
+  "description": "An animated banner that cycles through a list of items.",
+  "version": "1.0.0",
+  "authors": [
+    "Jimmy Arroyo"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "element",
+    "banner",
+    "animated"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JamesRArroyo/ab-animated-banner"
+  },
+  "license": "MIT",
   "main": "index.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0"
