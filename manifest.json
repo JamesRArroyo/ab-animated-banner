@@ -1,0 +1,6 @@
+{
+  "name": "ab-animated-banner",
+  "short_name": "ab-animated-banner",
+  "start_url": "/",
+  "display": "standalone"
+}
