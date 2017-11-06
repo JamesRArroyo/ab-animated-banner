@@ -1,0 +1,32 @@
+<link rel="import" href="./bower_components/polymer/polymer-element.html">
+
+<dom-module id="ab-animated-banner">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[test]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class AbAnimatedBanner extends Polymer.Element {
+      static get is() { return 'ab-animated-banner'; }
+      static get properties() {
+        return {
+          test: {
+            type: String,
+            value: 'Test string...'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(AbAnimatedBanner.is, AbAnimatedBanner);
+  </script>
+</dom-module>
