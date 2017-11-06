@@ -1,0 +1,73 @@
+<link rel="import" href="./bower_components/polymer/polymer-element.html">
+
+<dom-module id="ab-animated-banner">
+  <template>
+    <style>
+
+      :host {
+        display: block;
+      }
+
+      .banner-container{
+          width: 30%;
+      }
+
+      .banner{
+          background: white;
+          height: 70px;
+          font-size: 12px;
+          color: black;
+          text-align: left;
+
+      }
+
+      .banner .innerLeft{
+          height: 100%;
+          width: 20%;
+          float: left;
+          background: rgba(253,202,0,1);
+      }
+
+      .innerLeft h4{
+          font-size: 20px;
+          text-align: center;
+      }
+
+
+
+    </style>
+
+    <div class="banner-container">
+        <div class="banner">
+            <div class="innerLeft">
+                <h4>[[title]]</h4>
+            </div>
+        </div>
+    </div>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class AbAnimatedBanner extends Polymer.Element {
+      static get is() { return 'ab-animated-banner'; }
+      static get properties() {
+        return {
+          title: {
+            type: String,
+            value: 'Title'
+          },
+          dataSet: {
+            type: Array,
+            value: ['Jimmy Arroyo', 'John Doe', 'Bob Smith']
+          }
+        };
+      }
+    }
+
+    window.customElements.define(AbAnimatedBanner.is, AbAnimatedBanner);
+  </script>
+</dom-module>
