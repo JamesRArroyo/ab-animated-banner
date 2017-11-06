@@ -33,7 +33,33 @@
           text-align: center;
       }
 
+      .banner .animation{
+          height: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content:flex-start;
 
+      }
+
+      .animation span{
+          height: 40px;
+          margin: 13px 15px 0 0;
+      }
+
+      .animation .img{
+          height: 40px;
+          margin: 13px 15px 0 0;
+          width: 40px;
+          margin-left: 10px;
+      }
+
+      .animation .text{
+          width: 200px;
+          padding-top: 11px;
+          font-size: 14px;
+          font-weight: 800;
+          color: #525252;
+      }
 
     </style>
 
@@ -41,6 +67,10 @@
         <div class="banner">
             <div class="innerLeft">
                 <h4>[[title]]</h4>
+            </div>
+            <div id="bannerAnimation" class="animation">
+              <span class="img"></span>
+              <span class="text">[[bodyText]]</span>
             </div>
         </div>
     </div>
@@ -53,12 +83,20 @@
      * @polymer
      */
     class AbAnimatedBanner extends Polymer.Element {
-      static get is() { return 'ab-animated-banner'; }
+
+      static get is() {
+        return 'ab-animated-banner';
+      }
+
       static get properties() {
         return {
           title: {
             type: String,
             value: 'Title'
+          },
+          bodyText: {
+            type: String,
+            value: 'Body TExt'
           },
           dataSet: {
             type: Array,
@@ -66,6 +104,37 @@
           }
         };
       }
+
+      /**
+       * Cycles through an array of strings displaying them one by one
+       * with an animation
+       *
+       * @param {Array<String>} values An array of strings
+       */
+      _cycleAnimation(values) {
+        this.$.bannerAnimation.animate([
+          {transform: 'translateY(0)', opacity: 1, easing: 'ease-in'},
+          {transform: 'translateY(0)', opacity: 1},
+          {transform: 'translateY(0)', opacity: 1}, // Hack: added duplicate keyframe since web animations api doesnt allow a delay or duration on a specific keyframe in the sequence
+          {transform: 'translateY(0)', opacity: 0, easing: 'ease-out'}
+        ], {
+          duration: 4000,
+          iterations: Infinity,
+          direction: 'alternate',
+          fill: 'forwards'
+        });
+
+      }
+
+      ready() {
+        super.ready();
+
+        // Start cycle animation
+        this._cycleAnimation(['1', '2', '3', '4', '5']);
+      }
+
+
+
     }
 
     window.customElements.define(AbAnimatedBanner.is, AbAnimatedBanner);
