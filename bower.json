@@ -17,11 +17,13 @@
     "url": "git://github.com/JamesRArroyo/ab-animated-banner"
   },
   "license": "MIT",
-  "main": "index.html",
+  "main": "ab-animated-banner.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0"
   },
   "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#1 - 2",
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
   }
