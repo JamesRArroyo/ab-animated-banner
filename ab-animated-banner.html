@@ -82,19 +82,34 @@
 
       static get properties() {
         return {
+          /**
+          * The title displayed in the left side of the banner.
+          */
           title: {
             type: String,
             value: 'Title'
           },
+
+          /**
+          * The body text of the banner.
+          */
           body: {
             type: String,
             value: ''
           },
+
+          /**
+          * Set the array of strings to be displayed in the body of the banner.
+          */
           dataSet: {
             type: Array,
             value: ['Jimmy Arroyo', 'John Doe', 'Bob Smith']
           },
-          _arrayCyclePosition: {
+
+          /**
+          * The dataSet's position in which the banner's body is displaying.
+          */
+          _dataSetPosition: {
             type: Number,
             value: -1
           }
@@ -109,10 +124,10 @@
        */
       _cycleAnimation() {
         // increment array and get remainder so loop is never ending.
-        this._arrayCyclePosition = (this._arrayCyclePosition + 1) % this.dataSet.length;
+        this._dataSetPosition = (this._dataSetPosition + 1) % this.dataSet.length;
 
         // update banner body with new value;
-        this.body = this.dataSet[this._arrayCyclePosition];
+        this.body = this.dataSet[this._dataSetPosition];
 
         let bannerAnimation = this.$.bannerAnimation.animate([
           {transform: 'translateY(0)', opacity: 1, easing: 'ease-in'},
@@ -141,8 +156,6 @@
         // Start animation cycle
         this._cycleAnimation();
       }
-
-
 
     }
 
