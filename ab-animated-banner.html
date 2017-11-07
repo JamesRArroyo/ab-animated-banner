@@ -21,56 +21,48 @@
 
       }
 
-      .banner .innerLeft{
+      .banner .titleBox{
           height: 100%;
           width: 20%;
           float: left;
           background: rgba(253,202,0,1);
       }
 
-      .innerLeft h4{
+      .titleBox h4{
           font-size: 20px;
           text-align: center;
       }
 
-      .banner .animation{
+      .banner .body{
           height: 100%;
           display: flex;
           flex-wrap: wrap;
           justify-content:flex-start;
-
       }
 
-      .animation span{
+      .body span{
           height: 40px;
           margin: 13px 15px 0 0;
       }
 
-      .animation .img{
-          height: 40px;
-          margin: 13px 15px 0 0;
-          width: 40px;
-          margin-left: 10px;
-      }
-
-      .animation .text{
+      .body .text{
           width: 200px;
           padding-top: 11px;
           font-size: 14px;
           font-weight: 800;
           color: #525252;
+          margin-left: 10px;
       }
 
     </style>
 
     <div class="banner-container">
         <div class="banner">
-            <div class="innerLeft">
+            <div class="titleBox">
                 <h4>[[title]]</h4>
             </div>
-            <div id="bannerAnimation" class="animation">
-              <span class="img"></span>
-              <span class="text">[[bodyText]]</span>
+            <div id="bannerAnimation" class="body">
+              <span class="text">[[body]]</span>
             </div>
         </div>
     </div>
@@ -94,13 +86,17 @@
             type: String,
             value: 'Title'
           },
-          bodyText: {
+          body: {
             type: String,
-            value: 'Body TExt'
+            value: ''
           },
           dataSet: {
             type: Array,
             value: ['Jimmy Arroyo', 'John Doe', 'Bob Smith']
+          },
+          _arrayCyclePosition: {
+            type: Number,
+            value: -1
           }
         };
       }
@@ -111,26 +107,39 @@
        *
        * @param {Array<String>} values An array of strings
        */
-      _cycleAnimation(values) {
-        this.$.bannerAnimation.animate([
+      _cycleAnimation() {
+        // increment array and get remainder so loop is never ending.
+        this._arrayCyclePosition = (this._arrayCyclePosition + 1) % this.dataSet.length;
+
+        // update banner body with new value;
+        this.body = this.dataSet[this._arrayCyclePosition];
+
+        let bannerAnimation = this.$.bannerAnimation.animate([
           {transform: 'translateY(0)', opacity: 1, easing: 'ease-in'},
           {transform: 'translateY(0)', opacity: 1},
           {transform: 'translateY(0)', opacity: 1}, // Hack: added duplicate keyframe since web animations api doesnt allow a delay or duration on a specific keyframe in the sequence
           {transform: 'translateY(0)', opacity: 0, easing: 'ease-out'}
         ], {
           duration: 4000,
-          iterations: Infinity,
+          iterations: 1,
           direction: 'alternate',
           fill: 'forwards'
         });
 
-      }
+        var element = this;
+
+        // Continue cylcing banner.
+        bannerAnimation.onfinish = function() {
+          element._cycleAnimation();
+        };
+
+      };
 
       ready() {
         super.ready();
 
-        // Start cycle animation
-        this._cycleAnimation(['1', '2', '3', '4', '5']);
+        // Start animation cycle
+        this._cycleAnimation();
       }
 
 
