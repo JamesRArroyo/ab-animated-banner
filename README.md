@@ -12,9 +12,11 @@ $ bower install -S ab-animated-banner
 
 ## Getting Started
 
-Import the element.
+Include the [webcomponents.js](http://webcomponents.org/polyfills/) "lite" polyfill (for browsers who don't natively support web components), then import `ab-animated-banner.html`:
+
 
 ```html
+<script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 <link rel="import" href="/bower_components/ab-animated-banner/ab-animated-banner.html">
 ```
 
