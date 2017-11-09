@@ -62,7 +62,7 @@
                 <h4>[[headerTitle]]</h4>
             </div>
             <div id="bannerAnimation" class="body">
-              <span class="text">[[body]]</span>
+              <span class="text">[[_body]]</span>
             </div>
         </div>
     </div>
@@ -98,19 +98,19 @@
           },
 
           /**
-          * The body text of the banner.
-          */
-          body: {
-            type: String,
-            value: ''
-          },
-
-          /**
           * Set the array of strings to be displayed in the body of the banner.
           */
           bodyArray: {
             type: Array,
             value: []
+          },
+
+          /**
+          * The body text of the banner.
+          */
+          _body: {
+            type: String,
+            value: ''
           },
 
           /**
@@ -133,7 +133,7 @@
         this._dataSetPosition = (this._dataSetPosition + 1) % this.bodyArray.length;
 
         // update banner body with new value;
-        this.body = this.bodyArray[this._dataSetPosition];
+        this._body = this.bodyArray[this._dataSetPosition];
 
         let bannerAnimation = this.$.bannerAnimation.animate([
           {transform: 'translateY(0)', opacity: 1, easing: 'ease-in'},
