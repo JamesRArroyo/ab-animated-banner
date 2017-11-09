@@ -21,26 +21,48 @@
 
       }
 
-      .banner .innerLeft{
+      .banner .header{
           height: 100%;
           width: 20%;
           float: left;
           background: rgba(253,202,0,1);
       }
 
-      .innerLeft h4{
+      .header h4{
           font-size: 20px;
           text-align: center;
       }
 
+      .banner .body{
+          height: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content:flex-start;
+      }
 
+      .body span{
+          height: 40px;
+          margin: 13px 15px 0 0;
+      }
+
+      .body .text{
+          width: 200px;
+          padding-top: 11px;
+          font-size: 14px;
+          font-weight: 800;
+          color: #525252;
+          margin-left: 10px;
+      }
 
     </style>
 
     <div class="banner-container">
         <div class="banner">
-            <div class="innerLeft">
-                <h4>[[title]]</h4>
+            <div class="header">
+                <h4>[[headerTitle]]</h4>
+            </div>
+            <div id="bannerAnimation" class="body">
+              <span class="text">[[_body]]</span>
             </div>
         </div>
     </div>
@@ -53,19 +75,108 @@
      * @polymer
      */
     class AbAnimatedBanner extends Polymer.Element {
-      static get is() { return 'ab-animated-banner'; }
+
+      static get is() {
+        return 'ab-animated-banner';
+      }
+
       static get properties() {
         return {
-          title: {
-            type: String,
-            value: 'Title'
+          /**
+          * Holds all attributes that can be passed to the banner.
+          */
+          bannerOptions: {
+            type: Object,
+            value: {}
           },
-          dataSet: {
+          /**
+          * The title displayed in the left side of the banner.
+          */
+          headerTitle: {
+            type: String,
+            value: ''
+          },
+
+          /**
+          * Set the array of strings to be displayed in the body of the banner.
+          */
+          bodyArray: {
             type: Array,
-            value: ['Jimmy Arroyo', 'John Doe', 'Bob Smith']
+            value: []
+          },
+
+          /**
+          * The body text of the banner.
+          */
+          _body: {
+            type: String,
+            value: ''
+          },
+
+          /**
+          * The dataSet's position in which the banner's body is displaying.
+          */
+          _dataSetPosition: {
+            type: Number,
+            value: -1
           }
         };
       }
+
+      /**
+       * Cycles through an array of strings displaying them one by one
+       * with an animation
+       *
+       */
+      _cycleAnimation() {
+        // increment array and get remainder so loop is never ending.
+        this._dataSetPosition = (this._dataSetPosition + 1) % this.bodyArray.length;
+
+        // update banner body with new value;
+        this._body = this.bodyArray[this._dataSetPosition];
+
+        let bannerAnimation = this.$.bannerAnimation.animate([
+          {transform: 'translateY(0)', opacity: 1, easing: 'ease-in'},
+          {transform: 'translateY(0)', opacity: 1},
+          {transform: 'translateY(0)', opacity: 1}, // Hack: added duplicate keyframe since web animations api doesnt allow a delay or duration on a specific keyframe in the sequence
+          {transform: 'translateY(0)', opacity: 0, easing: 'ease-out'}
+        ], {
+          duration: 4000,
+          iterations: 1,
+          direction: 'alternate',
+          fill: 'forwards'
+        });
+
+        var element = this;
+
+        // Continue cylcing banner.
+        bannerAnimation.onfinish = function() {
+          element._cycleAnimation();
+        };
+
+      };
+
+      /**
+       * Deconstructs the bannerOptions and assigns them to the element.
+       *
+       * @param {Object} bannerOptions Options used to customize the animatedBanner element.
+       */
+      assignProperties(bannerOptions) {
+        // TODO: Check that values are of correct type and handle errors
+        this.bodyArray = bannerOptions.bodyArray;
+        this.headerTitle = bannerOptions.headerTitle;
+      };
+
+      ready() {
+        super.ready();
+
+        // Bind bannerOptions to bannerElement
+        this.assignProperties(this.bannerOptions);
+
+        // Start animation cycle
+        this._cycleAnimation();
+      }
+
     }
 
     window.customElements.define(AbAnimatedBanner.is, AbAnimatedBanner);
