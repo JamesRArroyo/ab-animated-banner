@@ -1,8 +1,13 @@
 # \<ab-animated-banner\>
 
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/JamesRArroyo/ab-animated-banner)
+
+
 A Polymer web component.
 
 The `ab-animated-banner` is a polymer element which displays a simple banner that cycles through an array of strings.
+
+![](https://user-images.githubusercontent.com/11878947/32638046-7787664e-c57a-11e7-8321-01bd177e79db.gif)
 
 ## Installation
 
@@ -20,11 +25,28 @@ Include the [webcomponents.js](http://webcomponents.org/polyfills/) "lite" polyf
 <link rel="import" href="/bower_components/ab-animated-banner/ab-animated-banner.html">
 ```
 
-Add the element.
+Add the element using .
 
 ```html
 <ab-animated-banner> </ab-animated-banner>
 ```
+
+Customize the element by using the 'banner-options' attribute. ([Customizable properties](https://github.com/JamesRArroyo/ab-animated-banner#customizable-properties) are listed below.)
+
+```
+<ab-animated-banner banner-options='{"headerTitle": "Followers", "bodyArray": ["Jimmy Arroyo", "John Doe"]}'> </ab-animated-banner>
+```
+## Customizable Properties
+
+ab-animated-banner allows for the following properties to be customized or configured.
+
+Property           | Type | Description
+-------------------        | --------- | --------------------|
+headerTitle | String | The banner's title that is displayed in the header of the banner.
+bodyArray | Array<String> | The set of strings the banner cycles through in the body.
+This element is still in its early stages.. more customizations to come!! Feel free to request a feature by creating an [issue](https://github.com/JamesRArroyo/ab-animated-banner/issues) and labeling it as a 'feature' or feel free to [contribute](https://github.com/JamesRArroyo/ab-animated-banner#contributing).
+
+
 
 ## Contributing
 1. Fork it!
