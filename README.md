@@ -1,5 +1,8 @@
 # \<ab-animated-banner\>
 
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/JamesRArroyo/ab-animated-banner)
+
+
 A Polymer web component.
 
 The `ab-animated-banner` is a polymer element which displays a simple banner that cycles through an array of strings.
