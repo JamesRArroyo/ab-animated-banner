@@ -40,13 +40,12 @@ Customize the element by using the 'banner-options' attribute. ([Customizable pr
 
 ab-animated-banner allows for the following properties to be customized or configured.
 
-Property           | Type | Description
--------------------        | --------- | --------------------|
-headerTitle | String | The banner's title that is displayed in the header of the banner.
-bodyArray | Array<String> | The set of strings the banner cycles through in the body.
+| Property | Type | Description
+| --- | --- | --- |
+|headerTitle | String | The banner's title that is displayed in the header of the banner.|
+|bodyArray | Array<String> | The set of strings the banner cycles through in the body.|
+
 This element is still in its early stages.. more customizations to come!! Feel free to request a feature by creating an [issue](https://github.com/JamesRArroyo/ab-animated-banner/issues) and labeling it as a 'feature' or feel free to [contribute](https://github.com/JamesRArroyo/ab-animated-banner#contributing).
-
-
 
 ## Contributing
 1. Fork it!
